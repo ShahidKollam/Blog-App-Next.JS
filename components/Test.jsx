@@ -24,7 +24,7 @@ const Header = () => {
                 />
             </div>
             <div className="flex justify-between items-center bg-zinc-900 px-5 py-5 lg:px-20">
-                <Image src={assets.logo} alt="logo" width={"200"} className="w-[130px] sm:w-auto sm:ml-0" />
+                <Image src={assets.logo} alt="logo" width={200} className="w-[130px] sm:w-auto sm:ml-0" />
 
                 <nav
                     className={`md:flex mr-15 md:gap-10 text-[25px] text-white ${
