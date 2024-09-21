@@ -12,9 +12,9 @@ const Header = () => {
     };
 
     return (
-        <div className="flex flex-col m-1">
-            <div className="flex flex-col sm:flex-row items-center justify-center text-center lg:p-4 sm:p-2">
-                <p className="lg:text-lg text-sm sm:text-base hover:text-yellow-400">
+        <header className="sticky top-0 z-50 bg-black flex flex-col">
+            <div className="flex flex-col sm:flex-row items-center justify-center text-center lg:p-2 sm:p-2">
+                <p className="text-sm font-light sm:text-base hover:text-yellow-400">
                     Subscribe to our Newsletter For New & Latest Blogs and Resources
                 </p>
                 <Image
@@ -24,10 +24,10 @@ const Header = () => {
                 />
             </div>
             <div className="flex justify-between items-center bg-zinc-900 px-5 py-5 lg:px-20">
-                <Image src={assets.logo} alt="logo" width={"200"} className="w-[130px] sm:w-auto sm:ml-0" />
+                <Image src={assets.logo} alt="logo" className="w-[130px] md:w-[140px]  sm:ml-0" width={"180"}/>
 
                 <nav
-                    className={`md:flex mr-15 md:gap-10 text-[25px] text-white ${
+                    className={`md:flex mr-15 md:gap-10 text-[20px] text-white ${
                         isMenuOpen ? "flex flex-col absolute top-40 left-1/2 transform -translate-x-1/2" : "hidden"
                     } `}
                 >
@@ -57,7 +57,7 @@ const Header = () => {
                     onClick={toggleMenu}
                 />
             </div>
-        </div>
+        </header>
     );
 };
 
