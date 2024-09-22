@@ -4,14 +4,14 @@ import assets from "../../../../assets/assets";
 import SignInForm from '@/components/SignInForm'
 const page = () => {
     return (
-        <div className="h-screen bg-slate-900">
+        <div className="h-screen ">
             <header className="flex justify-center md:justify-between  items-center border-b border-zinc-700 bg-zinc-900 md:bg-transparent px-5 py-5 lg:px-20">
                 <Image src={assets.logo} alt="logo" className="w-[130px] md:w-[140px]  sm:ml-0" width={"180"} />
             </header>
 
             {/* left section */}
-            <div className="md:flex md:flex-row h-[85%]">
-                <div className="md:w-1/3 w-full flex justify-center flex-col  gap-10 px-10 pb-56 md:border-r border-zinc-700">
+            <div className="md:flex md:flex-row md:h-[80vh]">
+                <div className="md:w-1/3 w-full h-[60vh] md:h-[80vh] flex justify-center flex-col  gap-10 px-4 md:px-10 pb-24 md:pb-56 md:border-r border-zinc-700">
                     <Image
                         src={assets.loginIcon}
                         alt="logo"
@@ -26,8 +26,8 @@ const page = () => {
 
                 {/* right section */}
 
-                <div className="w-full  ">
-                  {/* <SignInForm /> */}
+                <div className="w-full ">
+                  <SignInForm />
                 </div>
             </div>
         </div>
