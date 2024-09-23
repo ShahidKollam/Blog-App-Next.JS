@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 const SignInForm = () => {
     const schema = z.object({
@@ -17,9 +19,27 @@ const SignInForm = () => {
         formState: { errors },
     } = useForm({ resolver: zodResolver(schema) });
 
+    const loginMutation = useMutation({
+        mutationFn: async (formData) => {
+            const response = await axios.post("/api/user", formData);
+            return response.data;
+        },
+        onSuccess: (data) => {
+            console.log("Login successful:", data);
+            // Handle success (e.g., redirect, show message, etc.)
+        },
+        onError: (error) => {
+            console.error("Error logging in:", error);
+            // Handle error (e.g., show error message)
+        },
+    });
+
+
     const onSubmit = (data) => {
+        loginMutation.mutate(data);
         console.log(data);
     };
+
 
     return (
         <div className="flex px-3 md:pt-20 md:pl-44 pb-36">
@@ -47,7 +67,11 @@ const SignInForm = () => {
                     <label>I Agree with Terms of Use and Privacy Policy</label>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-5">
-                    <input type="submit" className="bg-yellow-400 text-black w-full p-2 md:w-1/3 md:p-3 font-bold rounded-xl" value="Log In" />
+                    <input
+                        type="submit"
+                        className="bg-yellow-400 text-black w-full p-2 md:w-1/3 md:p-3 font-bold rounded-xl"
+                        value="Log In"
+                    />
                     <p>or</p>
                     <p>
                         Don't have an acccount yet?{" "}
