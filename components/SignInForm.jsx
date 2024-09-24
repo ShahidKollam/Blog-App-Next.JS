@@ -75,7 +75,7 @@ const SignInForm = () => {
                     <p>or</p>
                     <p>
                         Don't have an acccount yet?{" "}
-                        <Link href="" className="text-yellow-400">
+                        <Link href="/sign-up" className="text-yellow-400">
                             Register Here
                         </Link>
                     </p>
