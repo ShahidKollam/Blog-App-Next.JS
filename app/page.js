@@ -6,6 +6,7 @@ export default function Home() {
     return (
         <>
             home page for first login to home page
+            <Test />
         </>
     );
 }

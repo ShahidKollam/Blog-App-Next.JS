@@ -24,11 +24,13 @@ const Header = () => {
                 />
             </div>
             <div className="flex justify-between items-center bg-zinc-900 px-5 py-5 lg:px-20">
-                <Image src={assets.logo} alt="logo" className="w-[130px] md:w-[140px]  sm:ml-0" width={"180"}/>
+                <Image src={assets.logo} alt="logo" className="w-[130px] md:w-[140px]  sm:ml-0" width={"180"} />
 
                 <nav
-                    className={`md:flex mr-15 md:gap-10 text-[20px] text-white ${
-                        isMenuOpen ? "flex flex-col absolute top-40 left-1/2 transform -translate-x-1/2" : "hidden"
+                    className={`md:flex mr-15 md:gap-10 bg-zinc-900 w-full text-[20px] text-white flex justify-center  ${
+                        isMenuOpen
+                            ? "flex flex-col justify-center items-center absolute top-40 left-1/2 transform -translate-x-1/2"
+                            : "hidden"
                     } `}
                 >
                     <Link href="/" className="hover:text-yellow-400 py-1">
@@ -45,7 +47,7 @@ const Header = () => {
                     </Link>
                 </nav>
 
-                <button className="hidden md:flex bg-yellow-400 text-black font-semibold rounded-md py-2 px-4">
+                <button className="hidden md:flex bg-yellow-400 text-black font-semibold rounded-md w-1/12 py-2 px-4">
                     Contact Us
                 </button>
 
