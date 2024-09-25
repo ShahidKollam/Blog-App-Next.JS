@@ -1,14 +1,17 @@
-import { FaSearch } from 'react-icons/fa';
+import SearchBox from "@/components/AdminComponents/SearchBox";
+import BlogListTable from "@/components/AdminComponents/BlogListTable";
 
-export default function SearchInput() {
-  return (
-    <div className="flex items-center bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 shadow-sm w-full max-w-md">
-      <FaSearch className="text-gray-400" />
-      <input
-        type="text"
-        placeholder="Search anything here..."
-        className="bg-transparent outline-none ml-2 w-full placeholder-gray-500 text-sm"
-      />
-    </div>
-  );
+export default function Page() {
+    return (
+        <div>
+            <div className="flex items-center gap-32 m-5">
+                <h1 className="text-2xl text-yellow-400">List Blogs</h1>
+                <SearchBox />
+            </div>
+            {/* table */}
+            <div>
+                <BlogListTable />
+            </div>
+        </div>
+    );
 }
