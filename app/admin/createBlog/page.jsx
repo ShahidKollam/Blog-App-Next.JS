@@ -1,9 +1,11 @@
 import SearchBox from "@/components/AdminComponents/SearchBox";
-
+import CreateBlogForm from "@/components/AdminComponents/CreateBlogForm";
+import Text from "@/components/Test";
 const page = () => {
     return (
-        <div>
+        <div className="w-5/6">
             <SearchBox headerText={"Create a Blog"} />
+            <CreateBlogForm />
         </div>
     );
 };
