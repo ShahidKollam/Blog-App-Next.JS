@@ -1,11 +1,11 @@
-import React from 'react'
+import SearchBox from "@/components/AdminComponents/SearchBox";
 
 const page = () => {
-  return (
-    <div>
-        
-    </div>
-  )
-}
+    return (
+        <div>
+            <SearchBox headerText={"Create a Blog"} />
+        </div>
+    );
+};
 
-export default page
+export default page;
