@@ -133,7 +133,6 @@ const Page = ({ params }) => {
                                 </ul>
                             </div>
                         </div>
-                        <div></div>
                     </div>
                 </div>
             </div>
