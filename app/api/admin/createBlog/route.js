@@ -1,23 +1,35 @@
 import connectDB from "@/lib/config/db";
 import Blog from "@/lib/models/BlogModel";
 import { NextResponse } from "next/server";
+// import { v2 as cloudinary } from "cloudinary";
+import cloudinary from "@/lib/config/cloudinary";
 
 export async function POST(req) {
+    
     try {
         await connectDB();
 
-        // Parse the request body (assuming JSON format)
         const body = await req.json();
-        console.log(body);
-        
-        const {  blogTitle, publishingDate, category, authorName, paragraphTitle, description } = body;
+        const { formData } = body;
+
+        const { blogTitle, publishingDate, category, authorName, paragraphTitle, description } = formData;
+
+        let { blogImage } = formData;
+        //console.log(blogImage);
 
         if (!blogTitle || !publishingDate || !category || !authorName || !paragraphTitle || !description) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });
         }
+        console.log("okkkkkk");
+        
+        if (blogImage) {
+            const uploadResponse = await cloudinary.uploader.upload(blogImage);
+            blogImage = uploadResponse.secure_url;
+        }
+        console.log(blogImage);
 
         const newBlog = new Blog({
-            blogImage: "sss", // Add logic here for handling blog image uploads
+            blogImage,
             blogTitle,
             publishingDate,
             category,

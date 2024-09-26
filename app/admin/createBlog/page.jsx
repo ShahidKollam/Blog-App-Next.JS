@@ -1,6 +1,6 @@
 import SearchBox from "@/components/AdminComponents/SearchBox";
 import CreateBlogForm from "@/components/AdminComponents/CreateBlogForm";
-import Text from "@/components/Test";
+
 const page = () => {
     return (
         <div className="w-5/6">

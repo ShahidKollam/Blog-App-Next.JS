@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,9 +7,13 @@ import { Input } from "../ui/input";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
+import usePreviewImg from "@/hooks/usePreviewImage";
 
 const CreateBlogForm = () => {
-    const {toast} = useToast()
+    const { handleImageChange, imgUrl, setImgUrl } = usePreviewImg();
+    
+    const imageRef = useRef(null); 
+    const { toast } = useToast();
     // Define Zod schema for validation
     const schema = z.object({
         //blogImage: z.any(),
@@ -33,7 +37,7 @@ const CreateBlogForm = () => {
     // post req api
     const mutation = useMutation({
         mutationFn: async (formData) => {
-            const response = await axios.post("/api/admin/createBlog", formData);
+            const response = await axios.post("/api/admin/createBlog", {formData});
             return response.data;
         },
         onSuccess: (data) => {
@@ -43,7 +47,7 @@ const CreateBlogForm = () => {
                 status: "success",
                 duration: 9000,
             });
-
+            setImgUrl("")
             //console.log("Blog Creation successful:", data);
             // Handle success (e.g., redirect, show message, etc.)
         },
@@ -54,18 +58,22 @@ const CreateBlogForm = () => {
                 status: "error",
                 duration: 9000,
             });
-           // console.error("Error in creating Blog:", error.response.data.error);
+            // console.error("Error in creating Blog:", error.response.data.error);
             // Handle error (e.g., show error message)
         },
-    });
-
+    }); 
 
     // On form submit
     const onSubmit = (data) => {
-        //console.log(data);
-        mutation.mutate(data);
-        // Handle form submission logic
+        const payload = {
+            ...data, // this spreads the data from your form
+            blogImage: imgUrl, // Assuming imgUrl is a file object
+        };
+    
+        // Sending the combined object to the server
+        mutation.mutate(payload);
     };
+        
 
     return (
         <div className="bg-zinc-900 rounded h-max  m-5">
@@ -76,10 +84,14 @@ const CreateBlogForm = () => {
                     <Input
                         type="file"
                         accept="image/*"
+                        // ref={imageRef}
+                        // onClick={() => imageRef.current.click()}
+
+                        onChange={handleImageChange}
                         className="w-1/4 h-24 border-yellow-300 border-dashed"
-                        {...register("blogImage")}
+                        // {...register("blogImage")}
                     />
-                    {errors.blogImage && <span className="text-red-500">Blog image is required</span>}
+                    {/* {errors.blogImage && <span className="text-red-500">Blog image is required</span>} */}
                 </div>
 
                 {/* Two inputs in one line - First Row */}
@@ -113,7 +125,8 @@ const CreateBlogForm = () => {
                         <label>Category</label>
                         <select
                             className="w-full h-14 bg-zinc-800 border-transparent text-white px-3 rounded-md"
-                            {...register("category")} defaultValue="kkkk"
+                            {...register("category")}
+                            defaultValue="kkkk"
                         >
                             <option value="" disabled selected>
                                 Select category
