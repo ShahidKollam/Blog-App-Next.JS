@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import assets from "../../../../assets/assets";
 import SignUpForm from '@/components/SignUpForm'
+
 const page = () => {
     return (
         <div className="h-screen ">

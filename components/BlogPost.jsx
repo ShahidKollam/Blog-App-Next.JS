@@ -1,9 +1,34 @@
+"use client";
 import assets from "@/assets/assets";
 import Image from "next/image";
 import React from "react";
 import { FaHeart, FaShareAlt, FaEye } from "react-icons/fa";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
-const Page = ({ params }) => {
+// BlogList.js
+const Page = () => {
+    const fetchBlogs = async () => {
+        const response = await axios("/api/blog");
+        return response.data;
+    };
+    useQuery
+
+    const { isLoading, isError, error, data } = useQuery({
+        queryKey: ["blogs"],
+        queryFn: fetchBlogs,
+      //  enabled: false,
+    });
+   
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
+
+    if (isError) {
+        return <p>Error fetching blogs: {error.message}</p>;
+    }
+    console.log("blog", data);
+
     return (
         <div className="">
             <div>
@@ -81,8 +106,6 @@ const Page = ({ params }) => {
                         </p>
                     </div>
                 </div>
-                
-
 
                 {/* right side */}
                 <div className="flex-[1] last:-order-1 md:last:order-none">

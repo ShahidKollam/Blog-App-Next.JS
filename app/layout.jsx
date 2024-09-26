@@ -1,7 +1,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Provider from "./Provider.jsx";
-
+import Provider from "./Provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
@@ -14,7 +14,10 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={outfit.className}>
-                <Provider>{children}</Provider>
+                <Provider>
+                    {children}
+                    <Toaster position="bottom-top" />
+                </Provider>
             </body>
         </html>
     );

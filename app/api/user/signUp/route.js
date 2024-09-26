@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import connectDB from "@/lib/config/db.js";
 import User from "@/lib/models/UserModel.js";
 import { NextResponse } from "next/server";
-
+ 
 // Environment variable for bcrypt salt rounds
 const SALT_ROUNDS = process.env.SALT_ROUNDS || 10;
 

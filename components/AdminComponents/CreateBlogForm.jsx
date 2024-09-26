@@ -4,14 +4,18 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { useToast } from "@/hooks/use-toast";
 
 const CreateBlogForm = () => {
+    const {toast} = useToast()
     // Define Zod schema for validation
     const schema = z.object({
-        blogImage: z.any(),
+        //blogImage: z.any(),
         blogTitle: z.string().min(1, "Title is required"),
         publishingDate: z.string().min(1, "Date is required"),
-        //category: z.string().min(1, "Category is required"),
+        category: z.string().min(1, "Category is required"),
         authorName: z.string().min(1, "Author name is required"),
         paragraphTitle: z.string().min(1, "Paragraph title is required"),
         description: z.string().min(1, "Description is required"),
@@ -26,14 +30,45 @@ const CreateBlogForm = () => {
         resolver: zodResolver(schema),
     });
 
+    // post req api
+    const mutation = useMutation({
+        mutationFn: async (formData) => {
+            const response = await axios.post("/api/admin/createBlog", formData);
+            return response.data;
+        },
+        onSuccess: (data) => {
+            toast({
+                title: "Success",
+                description: "Blog created successfully!",
+                status: "success",
+                duration: 9000,
+            });
+
+            //console.log("Blog Creation successful:", data);
+            // Handle success (e.g., redirect, show message, etc.)
+        },
+        onError: (error) => {
+            toast({
+                title: "Error",
+                description: error.response?.data?.error || "Blog creation failed",
+                status: "error",
+                duration: 9000,
+            });
+           // console.error("Error in creating Blog:", error.response.data.error);
+            // Handle error (e.g., show error message)
+        },
+    });
+
+
     // On form submit
     const onSubmit = (data) => {
-        console.log(data);
+        //console.log(data);
+        mutation.mutate(data);
         // Handle form submission logic
     };
 
     return (
-        <div className="bg-zinc-900 rounded h-auto m-5">
+        <div className="bg-zinc-900 rounded h-max  m-5">
             <form onSubmit={handleSubmit(onSubmit)} className="p-10">
                 {/* Image input */}
                 <div className="space-y-3">
@@ -41,7 +76,7 @@ const CreateBlogForm = () => {
                     <Input
                         type="file"
                         accept="image/*"
-                        className="w-2/12 h-28 border-yellow-300 border-dashed"
+                        className="w-1/4 h-24 border-yellow-300 border-dashed"
                         {...register("blogImage")}
                     />
                     {errors.blogImage && <span className="text-red-500">Blog image is required</span>}
@@ -78,7 +113,7 @@ const CreateBlogForm = () => {
                         <label>Category</label>
                         <select
                             className="w-full h-14 bg-zinc-800 border-transparent text-white px-3 rounded-md"
-                            {...register("category")}
+                            {...register("category")} defaultValue="kkkk"
                         >
                             <option value="" disabled selected>
                                 Select category
@@ -128,12 +163,13 @@ const CreateBlogForm = () => {
                 </div>
 
                 {/* Submit button */}
-                <div className="mt-10 flex justify-end">
+                <div className="mt-10 flex justify-center">
                     <button
                         type="submit"
                         className="w-1/6 bg-yellow-400 text-black py-4 px-4 rounded-sm hover:bg-yellow-500"
+                        disabled={mutation.isPending}
                     >
-                        Create Blog
+                        {mutation.isPending ? "Loading..." : "Create Blog"}
                     </button>
                 </div>
             </form>
