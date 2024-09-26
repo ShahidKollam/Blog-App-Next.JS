@@ -1,9 +1,12 @@
-import React from 'react'
+"use client";
+import Header from "@/components/Header";
+import Test from "@/components/Test";
+import BlogCard from "@/components/BlogCard";
 
-const page = () => {
-  return (
-    <div>page for home page</div>
-  )
+export default function Home() {
+    return (
+        <>
+            <BlogCard />
+        </>
+    );
 }
-
-export default page

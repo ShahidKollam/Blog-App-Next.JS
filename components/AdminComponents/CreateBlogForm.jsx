@@ -11,7 +11,7 @@ const CreateBlogForm = () => {
         blogImage: z.any(),
         blogTitle: z.string().min(1, "Title is required"),
         publishingDate: z.string().min(1, "Date is required"),
-        category: z.string().min(1, "Category is required"),
+        //category: z.string().min(1, "Category is required"),
         authorName: z.string().min(1, "Author name is required"),
         paragraphTitle: z.string().min(1, "Paragraph title is required"),
         description: z.string().min(1, "Description is required"),
@@ -76,12 +76,18 @@ const CreateBlogForm = () => {
                 <div className="grid grid-cols-2 pt-4 gap-10">
                     <div className="space-y-3">
                         <label>Category</label>
-                        <Input
-                            type="text"
-                            placeholder="Enter"
-                            className="w-full h-14 bg-zinc-800 border-transparent"
+                        <select
+                            className="w-full h-14 bg-zinc-800 border-transparent text-white px-3 rounded-md"
                             {...register("category")}
-                        />
+                        >
+                            <option value="" disabled selected>
+                                Select category
+                            </option>
+                            <option value="Technology">Technology</option>
+                            <option value="Health">Health</option>
+                            <option value="Education">Education</option>
+                            <option value="Business">Business</option>
+                        </select>
                         {errors.category && <span className="text-red-500">{errors.category.message}</span>}
                     </div>
 

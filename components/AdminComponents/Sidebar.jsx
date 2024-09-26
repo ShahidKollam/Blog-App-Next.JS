@@ -31,16 +31,16 @@ const Sidebar = function Sidebar() {
                         <div className="flex justify-center items-center ">
                             <span>{<PiNoteBlankFill />}</span>
                             <span className="ml-2">Blog</span>
-                            {blogOpen && <span className="pl-28">{<FaAngleDoubleUp />}</span>}
+                            {blogOpen && <span className="pl-[100px]">{<FaAngleDoubleUp />}</span>}
                         </div>
                     </div>
                     {blogOpen && (
                         <div className="ml-6 mt-2 pl-4">
-                            <Link href="" className="block mb-2 hover:text-blue-500">
-                                Edit Blog
+                            <Link href="/admin/createBlog" className="block mb-2 hover:text-blue-500">
+                                Create Blog
                             </Link>
-                            <Link href="" className="block mb-2 hover:text-blue-500">
-                                Edit Blog
+                            <Link href="/admin/blogList" className="block mb-2 hover:text-blue-500">
+                                List Blog
                             </Link>{" "}
                         </div>
                     )}
@@ -56,17 +56,14 @@ const Sidebar = function Sidebar() {
                         <div className="flex justify-center items-center ">
                             <span>{<PiUserSquareBold />}</span>
                             <span className="ml-2">Users</span>
-                            {usersOpen && <span className="pl-[105px]">{<FaAngleDoubleUp />}</span>}
+                            {usersOpen && <span className="pl-[90px]">{<FaAngleDoubleUp />}</span>}
                         </div>
                         </div>
                         {usersOpen && (
                         <div className="ml-6 mt-2 pl-4">
-                                <Link href="" className="block mb-2 hover:text-blue-500">
-                                    Edit Blog
+                                <Link href="/admin/users" className="block mb-2 hover:text-blue-500">
+                                    Users List
                                 </Link>{" "}
-                                <Link href="" className="block mb-2 hover:text-blue-500">
-                                    Edit Blog
-                                </Link>
                             </div>
                         )}
                     </div>
