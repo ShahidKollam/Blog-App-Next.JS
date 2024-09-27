@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -6,16 +5,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import useStore from "@/store/useStore";
 
 const SignInForm = () => {
-    
+    const router = useRouter();
+    const setUser = useStore((state) => state.setUser);
+    const setAuthentication = useStore((state) => state.setAuthentication);
+
     const schema = z.object({
         email: z.string().email(),
         password: z.string().min(4).max(10),
     });
 
     const {
-        register,
+        register, 
         handleSubmit,
         formState: { errors },
     } = useForm({ resolver: zodResolver(schema) });
@@ -27,6 +31,13 @@ const SignInForm = () => {
         },
         onSuccess: (data) => {
             console.log("Login successful:", data);
+            setUser(data);
+            setAuthentication(true);
+            console.log("Is authenticated:", useStore.getState().authenticated); // This will show 'true'
+            setTimeout(() => {
+                console.log("Updated user:", useStore.getState().user); // Accessing the updated state directly
+            }, 0);
+            router.push("/");
             // Handle success (e.g., redirect, show message, etc.)
         },
         onError: (error) => {
@@ -35,12 +46,10 @@ const SignInForm = () => {
         },
     });
 
-
     const onSubmit = (data) => {
         loginMutation.mutate(data);
         console.log(data);
     };
-
 
     return (
         <div className="flex px-3 md:pt-20 md:pl-44 pb-36">

@@ -1,8 +1,28 @@
+'use client'
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import assets from "../../../../assets/assets";
-import SignInForm from '@/components/SignInForm'
+import SignInForm from "@/components/SignInForm";
+
+import { useRouter } from "next/navigation";
+import useStore from "@/store/useStore";
+
 const page = () => {
+    const router = useRouter();
+    const { authenticated } = useStore();
+    
+
+    useEffect(() => {
+        // If the user is authenticated, redirect to the home page or dashboard
+        console.log("authenticated 1", authenticated); 
+
+        if (authenticated) {
+            console.log("authenticated", authenticated); 
+
+            router.push("/"); // or wherever you want to redirect
+        }
+    }, [router,authenticated]);
+
     return (
         <div className="h-screen ">
             <header className="flex justify-center md:justify-between  items-center border-b border-zinc-700 bg-zinc-900 md:bg-transparent px-5 py-5 lg:px-20">
@@ -27,7 +47,7 @@ const page = () => {
                 {/* right section */}
 
                 <div className="w-full ">
-                  <SignInForm />
+                    <SignInForm />
                 </div>
             </div>
         </div>

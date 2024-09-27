@@ -42,8 +42,8 @@ const Header = () => {
                     <Link href="/podcasts" className="hover:text-yellow-400 py-1">
                         Podcasts
                     </Link>
-                    <Link href="/resources" className="hover:text-yellow-400 py-1">
-                        Resources
+                    <Link href="/sign-in" className="hover:text-yellow-400 py-1">
+                        Sign in
                     </Link>
                 </nav>
 
