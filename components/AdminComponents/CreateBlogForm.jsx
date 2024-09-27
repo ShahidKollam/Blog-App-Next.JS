@@ -13,7 +13,7 @@ const CreateBlogForm = () => {
     const { handleImageChange, imgUrl, setImgUrl } = usePreviewImg();
     
     const imageRef = useRef(null); 
-    const { toast } = useToast();
+    const { toast } = useToast();  
     // Define Zod schema for validation
     const schema = z.object({
         //blogImage: z.any(),
@@ -37,7 +37,7 @@ const CreateBlogForm = () => {
     // post req api
     const mutation = useMutation({
         mutationFn: async (formData) => {
-            const response = await axios.post("/api/admin/createBlog", {formData});
+            const response = await axios.post("/api/admin/createBlog", formData);
             return response.data;
         },
         onSuccess: (data) => {
@@ -58,20 +58,18 @@ const CreateBlogForm = () => {
                 status: "error",
                 duration: 9000,
             });
-            // console.error("Error in creating Blog:", error.response.data.error);
-            // Handle error (e.g., show error message)
         },
     }); 
 
     // On form submit
     const onSubmit = (data) => {
         const payload = {
-            ...data, // this spreads the data from your form
-            blogImage: imgUrl, // Assuming imgUrl is a file object
+            ...data, 
+            blogImage: imgUrl,
         };
-    
-        // Sending the combined object to the server
-        mutation.mutate(payload);
+        console.log(payload);
+        
+            mutation.mutate(payload);
     };
         
 
@@ -126,9 +124,9 @@ const CreateBlogForm = () => {
                         <select
                             className="w-full h-14 bg-zinc-800 border-transparent text-white px-3 rounded-md"
                             {...register("category")}
-                            defaultValue="kkkk"
+                            defaultValue=""
                         >
-                            <option value="" disabled selected>
+                            <option value="" disabled>
                                 Select category
                             </option>
                             <option value="Technology">Technology</option>
