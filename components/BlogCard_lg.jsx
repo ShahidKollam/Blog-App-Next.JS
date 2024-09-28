@@ -2,36 +2,42 @@ import assets from "@/assets/assets";
 import Image from "next/image";
 import React from "react";
 import { FaEye, FaHeart } from "react-icons/fa";
+import { formatDate } from "@/utils/formateDate";
 
-const BlogCard_lg = () => {
+const BlogCard_lg = ({ blog }) => {
     return (
         <div className="flex p-20 border-b border-zinc-700">
             {/* child-1 */}
             <div className="flex-[1]">
-                <Image src={assets.blogImg3} alt="card-img" className="w-6/6 h-[310px] object-cover rounded" />
+                <Image
+                    src={blog.blogImage}
+                    width={700}
+                    height={50}
+                    alt="card-img"
+                    className="w-6/6 h-[310px] object-cover rounded"
+                />
             </div>
             {/* child-2 */}
 
             <div className="flex-[2] flex flex-col justify-between p-10">
-                <h1>Global Climate Summit Addresses Urgent Climate Action</h1>
+                <h1>{blog.blogTitle}</h1>
                 <p className="text-zinc-500">
-                    World leaders gathered at the Global Climate Summit to discuss urgent climate action, emissions
-                    reductions, and renewable energy targets.
+                    {blog.paragraghTitle}
                 </p>
                 <div className="flex gap-10">
                     <div className="flex gap-10 ">
                         <p className="text-gray-500">
                             Category <br />
-                            <span className="font-light text-white">Healthcare</span>
+                            <span className="font-light text-white">{blog.category}</span>
                         </p>
 
                         <p className="text-gray-500">
                             Publication Date <br />
-                            <span className="font-light">October 15, 2023</span>
+                            <span className="font-light">{formatDate(blog.publishingDate)}</span>
                         </p>
                         <p className="text-gray-500">
                             Author <br />
-                            <span className="font-light text-white">Emily Walker</span>
+                            <span className="font-light text-white">{blog.category}</span>
                         </p>
                     </div>
                 </div>

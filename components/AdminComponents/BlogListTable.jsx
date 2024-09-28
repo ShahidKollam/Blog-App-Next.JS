@@ -1,37 +1,17 @@
-'use client'
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+"use client";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Loader from "../Loader";
-
+import useFetchBlogs from "@/hooks/useFetchBlogs";
+import { formatDate } from "@/utils/formateDate";
 export default function BlogTable() {
-    const { isError, isLoading, error, data } = useQuery({
-        queryKey: ["blogs"],
-        queryFn: async () => {
-            const response = await axios(`/api/blog/BlogList`);
-            return response.data;
-        },
-    });
+    // Fetch blogs using the custom hook
+    const { isError, isLoading, error, data } = useFetchBlogs();
     if (isLoading) {
         return <Loader />;
     }
-
     if (isError) {
-        console.log("blog", error);
-
         return <p>Error fetching blogs: {error.message}</p>;
     }
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString("en-GB"); // Format as DD/MM/YYYY
-    };
-    const blogData = [
-        { author: "Tiger Nixon", category: "Travel Diaries", title: "The Best Kept Secrets", date: "22/5/2009" },
-        { author: "Garrett Winters", category: "Cultural Insights", title: "A Guide for Travelers", date: "22/5/2011" },
-        { author: "Ashton Cox", category: "Adventure & Exploration", title: "Try Dishes", date: "25/5/2011" },
-        { author: "Tiger Nixon", category: "Travel Diaries", title: "The Best Kept Secrets", date: "22/5/2009" },
-        { author: "Garrett Winters", category: "Cultural Insights", title: "A Guide for Travelers", date: "22/5/2011" },
-    ];
 
     return (
         <div className="overflow-x-auto p-5">
