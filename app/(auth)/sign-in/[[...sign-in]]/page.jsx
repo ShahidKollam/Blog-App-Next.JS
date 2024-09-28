@@ -19,7 +19,7 @@ const Page = () => {
 
             router.push("/"); // or wherever you want to redirect
         }
-    }, [router]);
+    }, [router,authenticated]);
 
     return (
         <div className="h-screen ">
