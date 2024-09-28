@@ -1,10 +1,14 @@
 "use client";
 import assets from "@/assets/assets";
+import useStore from "@/store/useStore";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import useLogout from "@/hooks/useLogout";
 
 const Header = () => {
+    const { logoutHandler, isLoading, error } = useLogout();
+    const {user} = useStore()
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -36,20 +40,41 @@ const Header = () => {
                     <Link href="/" className="hover:text-yellow-400 py-1">
                         Home
                     </Link>
-                    <Link href="/news" className="hover:text-yellow-400 py-1">
+                    <Link href="/" className="hover:text-yellow-400 py-1">
                         News
                     </Link>
-                    <Link href="/podcasts" className="hover:text-yellow-400 py-1">
+                    <Link href="/" className="hover:text-yellow-400 py-1">
                         Podcasts
                     </Link>
-                    <Link href="/sign-in" className="hover:text-yellow-400 py-1">
-                        Sign in
+                    <Link href="/" className="hover:text-yellow-400 py-1">
+                        Resources
                     </Link>
                 </nav>
+                <div className="flex w-[20%] gap-3">
+                    {!user ? (
+                        <Link href="/sign-in" className="">
+                            <button className="hidden md:flex bg-yellow-400 text-black text-center font-semibold rounded-md p-2 px-3 hover:bg-yellow-600">
+                                Log In
+                            </button>
+                        </Link>
+                    ) : (
+                        <Link href="/" className="">
+                            <button
+                                onClick={logoutHandler}
+                                disabled={isLoading} // Disable button while loading
+                                className={`bg-yellow-400 text-black font-semibold rounded-md p-2 px-3 hover:bg-yellow-600 ${
+                                    isLoading ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
+                            >
+                                {isLoading ? "Logging out..." : "Log out"}
+                            </button>
+                        </Link>
+                    )}
 
-                <button className="hidden md:flex bg-yellow-400 text-black font-semibold rounded-md w-1/12 py-2 px-4">
-                    Contact Us
-                </button>
+                    <button className="hidden md:flex bg-yellow-400 text-black text-center font-semibold rounded-md p-2 hover:bg-yellow-600">
+                        Contact Us
+                    </button>
+                </div>
 
                 {/* Mobile Icon to toggle menu */}
                 <Image

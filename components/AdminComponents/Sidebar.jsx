@@ -8,8 +8,10 @@ import { FaAngleDoubleUp } from "react-icons/fa";
 import { PiFoldersFill, PiNoteBlankFill, PiUserSquareBold } from "react-icons/pi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Link from "next/link";
+import useStore from "@/store/useStore";
 
 const Sidebar = function Sidebar() {
+    const {user} = useStore()
     const [blogOpen, setBlogOpen] = useState(false);
     const [usersOpen, setUsersOpen] = useState(false);
 
@@ -73,8 +75,8 @@ const Sidebar = function Sidebar() {
                 <div className="sticky bottom-10 z-10 flex justify-between bg-yellow-400 text-black p-3 rounded-md">
                         <Image src={assets.blogImg1} alt="userImage" className="w-10 h-10 rounded-full object-cover"/>
                         <div>
-                            <p className="text-sm">Admin Name</p>
-                            <p className="text-xs">Admin Email</p>
+                            <p className="text-sm">{user?.username}</p>
+                            <p className="text-xs">{user?.email}</p>
                         </div>
                         <BsThreeDotsVertical />
             </div>

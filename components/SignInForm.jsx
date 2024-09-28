@@ -36,7 +36,7 @@ const SignInForm = () => {
             console.log("Is authenticated:", useStore.getState().authenticated); // This will show 'true'
 
             try {
-                router.push("/admin");
+                router.push("/");
                 console.log("Router push to /admin was successful!"); // Debug log
             } catch (error) {
                 console.error("Failed to push to /admin:", error); // Debug log on error
