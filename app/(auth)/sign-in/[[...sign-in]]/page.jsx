@@ -7,7 +7,7 @@ import SignInForm from "@/components/SignInForm";
 import { useRouter } from "next/navigation";
 import useStore from "@/store/useStore";
 
-const page = () => {
+const Page = () => {
     const router = useRouter();
     const { authenticated } = useStore();
 
@@ -52,4 +52,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
