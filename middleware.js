@@ -14,7 +14,7 @@ export async function middleware(req) {
 
     try {
         const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET));
-        console.log(payload);
+        // console.log(payload);
 
         // Check if the user is an admin 
         if (payload.isAdmin === true) {

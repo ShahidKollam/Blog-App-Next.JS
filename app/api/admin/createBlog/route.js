@@ -10,12 +10,10 @@ export async function POST(req) {
         await connectDB();
 
         const body = await req.json();
-        const { formData } = body;
+        
+        const { blogTitle, publishingDate, category, authorName, paragraphTitle, description } = body;
 
-        const { blogTitle, publishingDate, category, authorName, paragraphTitle, description } = formData;
-
-        let { blogImage } = formData;
-        //console.log(blogImage);
+        let { blogImage } = body;
 
         if (!blogTitle || !publishingDate || !category || !authorName || !paragraphTitle || !description) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });

@@ -50,7 +50,7 @@ const SignInForm = () => {
     });
 
     const onSubmit = async (data) => {
-        await loginMutation.mutate(data);
+        loginMutation.mutate(data);
         console.log(data);
     };
 

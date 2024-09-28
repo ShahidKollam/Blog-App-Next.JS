@@ -30,6 +30,6 @@
         "**/*.tsx",
         "app/(auth)/sign-in/[[...sign-in]]/page.jsx",
         "middleware.js"
-    ],
+, "components/Loader.jsx"    ],
     "exclude": ["node_modules"]
 }

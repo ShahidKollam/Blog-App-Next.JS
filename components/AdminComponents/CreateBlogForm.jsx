@@ -17,7 +17,7 @@ const CreateBlogForm = () => {
     // Define Zod schema for validation
     const schema = z.object({
         //blogImage: z.any(),
-        blogTitle: z.string().min(1, "Title is required"),
+        blogTitle: z.string().min(1, "Title required: MAX - 35 words").max(35),
         publishingDate: z.string().min(1, "Date is required"),
         category: z.string().min(1, "Category is required"),
         authorName: z.string().min(1, "Author name is required"),
@@ -29,6 +29,7 @@ const CreateBlogForm = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(schema),
@@ -47,6 +48,7 @@ const CreateBlogForm = () => {
                 status: "success",
                 duration: 9000,
             });
+            reset();
             setImgUrl("")
             //console.log("Blog Creation successful:", data);
             // Handle success (e.g., redirect, show message, etc.)

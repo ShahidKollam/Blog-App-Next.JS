@@ -8,7 +8,7 @@ import useLogout from "@/hooks/useLogout";
 
 const Header = () => {
     const { logoutHandler, isLoading, error } = useLogout();
-    const {user} = useStore()
+    const { user } = useStore();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -50,7 +50,7 @@ const Header = () => {
                         Resources
                     </Link>
                 </nav>
-                <div className="flex w-[20%] gap-3">
+                <div className="flex justify-end w-[20%] gap-1">
                     {!user ? (
                         <Link href="/sign-in" className="">
                             <button className="hidden md:flex bg-yellow-400 text-black text-center font-semibold rounded-md p-2 px-3 hover:bg-yellow-600">
@@ -65,13 +65,14 @@ const Header = () => {
                                 className={`bg-yellow-400 text-black font-semibold rounded-md p-2 px-3 hover:bg-yellow-600 ${
                                     isLoading ? "opacity-50 cursor-not-allowed" : ""
                                 }`}
+                                style={{ width: "120px", whiteSpace: "nowrap" }}
                             >
                                 {isLoading ? "Logging out..." : "Log out"}
                             </button>
                         </Link>
                     )}
 
-                    <button className="hidden md:flex bg-yellow-400 text-black text-center font-semibold rounded-md p-2 hover:bg-yellow-600">
+                    <button className="hidden md:flex w-[100px] bg-yellow-400 text-black text-center font-semibold rounded-md p-2 hover:bg-yellow-600">
                         Contact Us
                     </button>
                 </div>

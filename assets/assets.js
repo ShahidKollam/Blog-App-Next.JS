@@ -5,6 +5,7 @@ import blogImg1 from "../assets/blog-img-1.png";
 import loginIcon from "../assets/login-Icon.png";
 import blogImg2 from "../assets/blog-img-2.png";
 import blogImg3 from "../assets/blog-img-3.png";
+import loaderSvg  from "../assets/loading-circle.svg";
 
 export default {
     logo,
@@ -14,4 +15,5 @@ export default {
     loginIcon,
     blogImg2,
     blogImg3,
+    loaderSvg,
 };

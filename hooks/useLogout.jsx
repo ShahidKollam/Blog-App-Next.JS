@@ -32,7 +32,7 @@ const useLogout = () => {
         mutation.mutate(); // Trigger the logout mutation
     };
 
-    return { logoutHandler, isLoading: mutation.isLoading, error: mutation.error };
+    return { logoutHandler, isLoading: mutation.isPending, error: mutation.error };
 };
 
 export default useLogout;

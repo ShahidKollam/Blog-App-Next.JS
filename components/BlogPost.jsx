@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 
 // BlogList.js
 const Page = () => {
-    const id = "66f6244f13ee56820611a3af"
+    const id = "66f7a09ac1ad7c299b835d5c"
     const fetchBlogs = async () => { 
         const response = await axios(`/api/blog/${id}`);
         return response.data;
@@ -41,7 +41,7 @@ const Page = () => {
                         className="md:h-[500px] object-cover h-[281px] px-0 my-1 md:my-0 border-b border-gray-600 md:border-none"
                     />
                     {/* image show text */}
-                    <h1 className="text-center md:px-7 md:py-4 p-2 bg-zinc-900 rounded-full absolute top-[350px] left-2 md:font-bold text-xl md:text-5xl md:absolute md:left-[293px] md:top-[520px] ">
+                    <h1 className="text-center md:px-7 md:py-4 p-2 bg-zinc-900 rounded-full absolute top-[350px] left-2 md:font-bold text-xl md:text-4xl md:absolute md:left-[293px] md:top-[520px] ">
                         {data?.blogTitle}
                     </h1>
                 </div>
@@ -59,7 +59,7 @@ const Page = () => {
                         </div>
                         <div className="p-5 md:p-20 space-y-5 overflow-auto flex-grow">
                             {/* paragragh */}
-                            <h1 className="text-2xl">Artificial Intelligence AI</h1>
+                            <h1 className="text-2xl">{data?.category}</h1>
                             <p className="text-1xl">
                                {data.description}
                                </p>
