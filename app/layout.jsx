@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
             <body className={outfit.className}>
                 <Provider>
                     {children}
-                    <Toaster position="bottom-top" />
+                    <Toaster />
                 </Provider>
             </body>
         </html>

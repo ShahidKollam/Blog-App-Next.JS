@@ -4,14 +4,15 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import usePreviewImg from "@/hooks/usePreviewImage";
 
 const CreateBlogForm = () => {
     const { handleImageChange, imgUrl, setImgUrl } = usePreviewImg();
-    
+    const queryClient = useQueryClient();
+
     const imageRef = useRef(null); 
     const { toast } = useToast();  
     // Define Zod schema for validation
@@ -24,6 +25,7 @@ const CreateBlogForm = () => {
         paragraphTitle: z.string().min(1, "Paragraph title is required"),
         description: z.string().min(1, "Description is required"),
     });
+
 
     // Set up useForm with zodResolver
     const {
@@ -48,6 +50,8 @@ const CreateBlogForm = () => {
                 status: "success",
                 duration: 9000,
             });
+            queryClient.invalidateQueries({ queryKey: ['blogs'] })
+
             reset();
             setImgUrl("")
             //console.log("Blog Creation successful:", data);
