@@ -19,7 +19,7 @@ const SignInForm = () => {
     });
 
     const {
-        register, 
+        register,
         handleSubmit,
         formState: { errors },
     } = useForm({ resolver: zodResolver(schema) });
@@ -34,20 +34,23 @@ const SignInForm = () => {
             setUser(data);
             setAuthentication(true);
             console.log("Is authenticated:", useStore.getState().authenticated); // This will show 'true'
-            setTimeout(() => {
-                console.log("Updated user:", useStore.getState().user); // Accessing the updated state directly
-            }, 0);
-            router.push("/");
-            // Handle success (e.g., redirect, show message, etc.)
+
+            try {
+                router.push("/admin");
+                console.log("Router push to /admin was successful!"); // Debug log
+            } catch (error) {
+                console.error("Failed to push to /admin:", error); // Debug log on error
+            }
         },
+
         onError: (error) => {
             console.error("Error logging in:", error);
             // Handle error (e.g., show error message)
         },
     });
 
-    const onSubmit = (data) => {
-        loginMutation.mutate(data);
+    const onSubmit = async (data) => {
+        await loginMutation.mutate(data);
         console.log(data);
     };
 

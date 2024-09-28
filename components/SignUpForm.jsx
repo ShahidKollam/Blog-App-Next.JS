@@ -5,8 +5,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const SignInForm = () => {
+    const router = useRouter();
+
     const schema = z.object({
         name: z.string().min(3),
         email: z.string().email(),
@@ -26,6 +29,7 @@ const SignInForm = () => {
         },
         onSuccess: (data) => {
             console.log("Login successful:", data);
+            router.push('/sign-in')
             // Handle success (e.g., redirect, show message, etc.)
         },
         onError: (error) => {

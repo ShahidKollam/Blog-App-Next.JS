@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import assets from "../../../../assets/assets";
@@ -10,18 +10,16 @@ import useStore from "@/store/useStore";
 const page = () => {
     const router = useRouter();
     const { authenticated } = useStore();
-    
 
     useEffect(() => {
         // If the user is authenticated, redirect to the home page or dashboard
-        console.log("authenticated 1", authenticated); 
+        console.log("authenticated", authenticated);
 
         if (authenticated) {
-            console.log("authenticated", authenticated); 
 
             router.push("/"); // or wherever you want to redirect
         }
-    }, [router,authenticated]);
+    }, [router]);
 
     return (
         <div className="h-screen ">
