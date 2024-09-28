@@ -1,15 +1,21 @@
 "use client";
-import assets from "@/assets/assets";
 import Image from "next/image";
 import React from "react";
 import { FaHeart, FaShareAlt, FaEye } from "react-icons/fa";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
 // BlogList.js
 const Page = () => {
-    const id = "66f7a09ac1ad7c299b835d5c"
-    const fetchBlogs = async () => { 
+    const params = useParams();
+    const { id } = params;
+
+    console.log("Fetched ID:", params);
+
+    const fetchBlogs = async () => {
+        if (!id) return; 
+
         const response = await axios(`/api/blog/${id}`);
         return response.data;
     };
@@ -17,7 +23,7 @@ const Page = () => {
     const { isLoading, isError, error, data } = useQuery({
         queryKey: ["blogs", id],
         queryFn: fetchBlogs,
-        //enabled: false,
+        enabled: !!id,
     });
 
     if (isLoading) {
@@ -31,10 +37,10 @@ const Page = () => {
 
     return (
         <>
-            <div className=""   >
+            <div className="">
                 <div>
                     <Image
-                        src={data.blogImage}
+                        src={data?.blogImage}
                         alt="Blog Image"
                         width={"1700"}
                         height={70}
@@ -51,18 +57,14 @@ const Page = () => {
 
                     <div className="flex-[2] border-r border-zinc-600 pb-[100px] h-[150vh] md:h-[100vh] flex flex-col">
                         <div className="md:p-20 p-5 space-y-5 border-b border-zinc-600">
-                        {/* Introduction */}
+                            {/* Introduction */}
                             <h1 className="text-2xl">Introduction</h1>
-                            <p className="text-1xl">
-                               {data.paragraphTitle}
-                               </p>
+                            <p className="text-1xl">{data?.paragraphTitle}</p>
                         </div>
                         <div className="p-5 md:p-20 space-y-5 overflow-auto flex-grow">
                             {/* paragragh */}
                             <h1 className="text-2xl">{data?.category}</h1>
-                            <p className="text-1xl">
-                               {data.description}
-                               </p>
+                            <p className="text-1xl">{data?.description}</p>
                         </div>
                     </div>
 

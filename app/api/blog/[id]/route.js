@@ -7,12 +7,14 @@ export async function GET(request, { params }) {
         await dbConnect();
 
         const { id } = params;
+        console.log(id);
+        
         const blog = await Blog.findById(id).lean();
 
         if (!blog) {
             return NextResponse.json({ message: "Blog not found" }, { status: 404 });
         }
-        // console.log(blog);
+      //  console.log(blog);
         
         return NextResponse.json(blog, { status: 200 });
     } catch (error) {
