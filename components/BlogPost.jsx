@@ -21,7 +21,7 @@ const Page = () => {
     };
 
     const { isLoading, isError, error, data } = useQuery({
-        queryKey: ["blogs", id],
+        queryKey: ["blog", id],
         queryFn: fetchBlogs,
         enabled: !!id,
     });

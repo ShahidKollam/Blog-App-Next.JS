@@ -13,7 +13,7 @@ const CreateBlogForm = () => {
     const { handleImageChange, imgUrl, setImgUrl } = usePreviewImg();
     const queryClient = useQueryClient();
 
-    const { toast } = useToast();  
+    const { toast } = useToast();
     // Define Zod schema for validation
     const schema = z.object({
         //blogImage: z.any(),
@@ -24,7 +24,6 @@ const CreateBlogForm = () => {
         paragraphTitle: z.string().min(1, "Paragraph title is required"),
         description: z.string().min(1, "Description is required"),
     });
-
 
     // Set up useForm with zodResolver
     const {
@@ -37,7 +36,7 @@ const CreateBlogForm = () => {
     });
 
     // post req api
-    const mutation = useMutation({        
+    const mutation = useMutation({
         mutationFn: async (formData) => {
             const response = await axios.post("/api/admin/createBlog", formData);
             return response.data;
@@ -49,11 +48,11 @@ const CreateBlogForm = () => {
                 status: "success",
                 duration: 9000,
             });
-            queryClient.invalidateQueries({ queryKey: ['blogs'] })
+            queryClient.invalidateQueries({ queryKey: ["blogs"], refetchType: "all" });
             console.log("invalidateQueries");
-            
+
             reset();
-            setImgUrl("")
+            setImgUrl("");
             console.log("Blog Creation successful:", data);
             // Handle success (e.g., redirect, show message, etc.)
         },
@@ -67,19 +66,18 @@ const CreateBlogForm = () => {
                 duration: 9000,
             });
         },
-    }); 
+    });
 
     // On form submit
     const onSubmit = (data) => {
         const payload = {
-            ...data, 
+            ...data,
             blogImage: imgUrl,
         };
-        console.log('Payload:', payload); // Log the payload before API call
-        
-            mutation.mutate(payload);
+        console.log("Payload:", payload); // Log the payload before API call
+
+        mutation.mutate(payload);
     };
-        
 
     return (
         <div className="bg-zinc-900 rounded h-max  m-5">
