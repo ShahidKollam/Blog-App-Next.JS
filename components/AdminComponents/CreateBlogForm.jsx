@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +13,6 @@ const CreateBlogForm = () => {
     const { handleImageChange, imgUrl, setImgUrl } = usePreviewImg();
     const queryClient = useQueryClient();
 
-    const imageRef = useRef(null); 
     const { toast } = useToast();  
     // Define Zod schema for validation
     const schema = z.object({
@@ -51,13 +50,16 @@ const CreateBlogForm = () => {
                 duration: 9000,
             });
             queryClient.invalidateQueries({ queryKey: ['blogs'] })
-
+            console.log("invalidateQueries");
+            
             reset();
             setImgUrl("")
-            //console.log("Blog Creation successful:", data);
+            console.log("Blog Creation successful:", data);
             // Handle success (e.g., redirect, show message, etc.)
         },
         onError: (error) => {
+            console.error("Blog creation error:", error);
+
             toast({
                 title: "Error",
                 description: error.response?.data?.error || "Blog creation failed",

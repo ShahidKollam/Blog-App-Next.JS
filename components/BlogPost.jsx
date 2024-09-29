@@ -91,11 +91,11 @@ const Page = () => {
                                 <div className="flex gap-20 ">
                                     <p className="md:text-xl font-bold text-gray-500">
                                         Publication Date <br />
-                                        <span className="font-light text-white">October 15, 2023</span>
+                                        <span className="font-light text-white">{data?.publishingDate}</span>
                                     </p>
                                     <p className="md:text-xl font-bold text-gray-500">
                                         Category <br />
-                                        <span className="font-light text-white">Healthcare</span>
+                                        <span className="font-light text-white">{data?.category}</span>
                                     </p>
                                 </div>
                                 <div className="flex gap-[105px] md:gap-[110px]">
@@ -104,7 +104,7 @@ const Page = () => {
                                         <span className="font-light text-white">10 Min</span>
                                     </p>
                                     <p className="md:text-xl font-bold text-gray-500">
-                                        Author <br /> <span className="font-light text-white">Dr. Emily Walker</span>
+                                        Author <br /> <span className="font-light text-white">{data?.authorName}</span>
                                     </p>
                                 </div>
                                 <div class="mb-4 p-4 bg-zinc-900 rounded-xl">

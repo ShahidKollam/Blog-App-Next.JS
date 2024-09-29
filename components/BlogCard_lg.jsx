@@ -10,7 +10,7 @@ const BlogCard_lg = ({ blog }) => {
             {/* child-1 */}
             <div className="flex-[1]">
                 <Image
-                    src={blog.blogImage}
+                    src={blog?.blogImage}
                     width={700}
                     height={50}
                     alt="card-img"
@@ -20,24 +20,24 @@ const BlogCard_lg = ({ blog }) => {
             {/* child-2 */}
 
             <div className="flex-[2] flex flex-col justify-between p-10">
-                <h1>{blog.blogTitle}</h1>
+                <h1>{blog?.blogTitle}</h1>
                 <p className="text-zinc-500">
-                    {blog.paragraghTitle}
+                    {blog?.paragraghTitle}
                 </p>
                 <div className="flex gap-10">
                     <div className="flex gap-10 ">
                         <p className="text-gray-500">
                             Category <br />
-                            <span className="font-light text-white">{blog.category}</span>
+                            <span className="font-light text-white">{blog?.category}</span>
                         </p>
 
                         <p className="text-gray-500">
                             Publication Date <br />
-                            <span className="font-light">{formatDate(blog.publishingDate)}</span>
+                            <span className="font-light">{formatDate(blog?.publishingDate)}</span>
                         </p>
                         <p className="text-gray-500">
                             Author <br />
-                            <span className="font-light text-white">{blog.category}</span>
+                            <span className="font-light text-white">{blog?.authorName}</span>
                         </p>
                     </div>
                 </div>
