@@ -42,8 +42,6 @@ const CreateBlogForm = () => {
             return response.data;
         },
         onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ["blogs"], refetchType: "all" });
-            console.log("invalidateQueries");
             toast({
                 title: "Success",
                 description: "Blog created successfully!",
@@ -65,11 +63,13 @@ const CreateBlogForm = () => {
                 duration: 9000,
             });
         },
-        onSettled: () => {
-            console.log("Mutation has settled, whether it was successful or not.");
-
-            // Optionally refetch the blogs here as well
-            queryClient.refetchQueries({ queryKey: ["blogs"] });
+        onSettled: async (_, error) => {
+            if (error) {
+                console.log("invalidateQueries has not settled.", error);
+            } else {
+                await queryClient.invalidateQueries({ queryKey: ["blogs"] });
+            }
+            console.log("invalidateQueries");
         },
     });
 
