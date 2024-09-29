@@ -11,6 +11,7 @@ const useFetchBlogs = () => {
             return response.data;
         },
         staleTime: 1000,
+        refetchType: 'all'
     });
 };
 
