@@ -42,15 +42,14 @@ const CreateBlogForm = () => {
             return response.data;
         },
         onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ["blogs"], refetchType: "all" });
+            console.log("invalidateQueries");
             toast({
                 title: "Success",
                 description: "Blog created successfully!",
                 status: "success",
                 duration: 9000,
             });
-            queryClient.invalidateQueries({ queryKey: ["blogs"], refetchType: "all" });
-            console.log("invalidateQueries");
-
             reset();
             setImgUrl("");
             console.log("Blog Creation successful:", data);
@@ -65,6 +64,12 @@ const CreateBlogForm = () => {
                 status: "error",
                 duration: 9000,
             });
+        },
+        onSettled: () => {
+            console.log("Mutation has settled, whether it was successful or not.");
+
+            // Optionally refetch the blogs here as well
+            queryClient.refetchQueries({ queryKey: ["blogs"] });
         },
     });
 
