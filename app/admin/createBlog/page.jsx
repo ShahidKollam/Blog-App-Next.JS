@@ -1,3 +1,4 @@
+'use client'
 import SearchBox from "@/components/AdminComponents/SearchBox";
 import CreateBlogForm from "@/components/AdminComponents/CreateBlogForm";
 
@@ -11,3 +12,4 @@ const page = () => {
 };
 
 export default page;
+ 
