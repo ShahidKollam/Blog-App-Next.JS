@@ -37,7 +37,7 @@ const CreateBlogForm = () => {
     });
 
     // post req api
-    const mutation = useMutation({
+    const mutation = useMutation({        
         mutationFn: async (formData) => {
             const response = await axios.post("/api/admin/createBlog", formData);
             return response.data;
@@ -75,7 +75,7 @@ const CreateBlogForm = () => {
             ...data, 
             blogImage: imgUrl,
         };
-        console.log(payload);
+        console.log('Payload:', payload); // Log the payload before API call
         
             mutation.mutate(payload);
     };
