@@ -41,7 +41,9 @@ const CreateBlogForm = () => {
             const response = await axios.post("/api/admin/createBlog", formData);
             return response.data;
         },
-        onSuccess: (data) => {
+        onSuccess: async(data) => {
+            await queryClient.setQueryData(['blogs'], (oldBlogs = []) => [...oldBlogs, data]);
+
             toast({
                 title: "Success",
                 description: "Blog created successfully!",
@@ -68,8 +70,9 @@ const CreateBlogForm = () => {
                 console.log("invalidateQueries has not settled.", error);
             } else {
                 await queryClient.invalidateQueries({ queryKey: ["blogs"] });
+                console.log("invalidateQueries");
+
             }
-            console.log("invalidateQueries");
         },
     });
 

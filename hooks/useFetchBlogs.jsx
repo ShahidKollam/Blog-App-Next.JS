@@ -10,8 +10,7 @@ const useFetchBlogs = () => {
             const response = await axios.get(`/api/blog/BlogList`);
             return response.data;
         },
-        staleTime: 1000,
-        refetchType: 'all'
+        staleTime: 0,
     });
 };
 
