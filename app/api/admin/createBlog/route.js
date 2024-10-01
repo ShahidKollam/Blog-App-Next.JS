@@ -40,6 +40,7 @@ export async function POST(req) {
         await newBlog.save();
         revalidatePath('/')
         console.log("Blog created successfully:", newBlog.blogTitle);
+        console.log("Blog created successfully:", newBlog.blogTitle);
 
 
         return NextResponse.json(newBlog, { status: 201 });
