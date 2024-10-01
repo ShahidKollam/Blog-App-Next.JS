@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/config/db";
 import Blog from "@/lib/models/BlogModel";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -11,6 +12,7 @@ export async function GET(request) {
         if (!blogs || blogs.length === 0) {
             return NextResponse.json({ message: "No blogs found" }, { status: 404 });
         }
+        revalidatePath('/')
 
         // Return the blogs in a JSON response with a 200 status
         return NextResponse.json(blogs, { status: 200 });

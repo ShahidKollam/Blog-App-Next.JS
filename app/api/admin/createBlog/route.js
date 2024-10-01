@@ -3,6 +3,7 @@ import Blog from "@/lib/models/BlogModel";
 import { NextResponse } from "next/server";
 // import { v2 as cloudinary } from "cloudinary";
 import cloudinary from "@/lib/config/cloudinary";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req) {
     
@@ -37,7 +38,9 @@ export async function POST(req) {
         });
 
         await newBlog.save();
+        revalidatePath('/')
         console.log("Blog created successfully:", newBlog.blogTitle);
+
 
         return NextResponse.json(newBlog, { status: 201 });
     } catch (error) {
