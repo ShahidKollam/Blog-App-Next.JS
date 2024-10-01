@@ -39,7 +39,8 @@ export async function POST(req) {
 
         await newBlog.save();
         revalidatePath('/')
-        console.log("Blog created successfully:", newBlog.blogTitle);
+        revalidatePath('/admin/blogList')
+
         console.log("Blog created successfully:", newBlog.blogTitle);
 
 

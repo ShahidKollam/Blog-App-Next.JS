@@ -42,7 +42,7 @@ const CreateBlogForm = () => {
             return response.data;
         },
         onSuccess: async(data) => {
-            await queryClient.setQueryData(['blogs'], (oldBlogs = []) => [...oldBlogs, data]);
+            //await queryClient.setQueryData(['blogs'], (oldBlogs = []) => [...oldBlogs, data]);
 
             toast({
                 title: "Success",
