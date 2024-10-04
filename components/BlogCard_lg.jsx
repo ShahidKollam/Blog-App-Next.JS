@@ -6,20 +6,20 @@ import { formatDate } from "@/utils/formateDate";
 
 const BlogCard_lg = ({ blog }) => {
     return (
-        <div className="flex p-20 border-b border-zinc-700">
+        <div className="md:flex p-4 md:p-20 border-b border-zinc-700">
             {/* child-1 */}
-            <div className="flex-[1]">
+            <div className="md:flex-[1]">
                 <Image
                     src={blog?.blogImage}
                     width={700}
                     height={50}
                     alt="card-img"
-                    className="w-6/6 h-[310px] object-cover rounded"
+                    className="w-6/6 md:h-[310px] object-cover rounded-xl"
                 />
             </div>
             {/* child-2 */}
 
-            <div className="flex-[2] flex flex-col justify-between p-10">
+            <div className="md:flex-[2] flex flex-col md:justify-between space-y-2 py-6 md:p-10">
                 <h1>{blog?.blogTitle}</h1>
                 <p className="text-zinc-500">
                     {blog?.paragraghTitle}
@@ -42,14 +42,14 @@ const BlogCard_lg = ({ blog }) => {
                     </div>
                 </div>
 
-                <div className="">
-                    <div className="flex justify-between">
+                <div className="pt-5">
+                    <div className="flex gap-10 md:gap-0 md:justify-between">
                         <div className="flex justify-center items-center p-1 border border-zinc-700 w-20 h-8 rounded-full">
                             <span className="flex gap-2 items-center">
                                 <FaEye /> 15k
                             </span>
                         </div>
-                        <div className="flex justify-center items-center p-1 mr-[700px] border border-zinc-700 w-20 h-8 rounded-full">
+                        <div className="flex justify-center items-center p-1 md:mr-[700px] border border-zinc-700 w-20 h-8 rounded-full">
                             <span className="flex gap-2 items-center">
                                 <FaHeart /> 10k
                             </span>

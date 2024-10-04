@@ -62,7 +62,7 @@ const Header = () => {
                             <button
                                 onClick={logoutHandler}
                                 disabled={isLoading} // Disable button while loading
-                                className={`bg-yellow-400 text-black font-semibold rounded-md p-2 px-3 hover:bg-yellow-600 ${
+                                className={`hidden md:flex bg-yellow-400 text-black font-semibold rounded-md p-2 px-3 hover:bg-yellow-600 ${
                                     isLoading ? "opacity-50 cursor-not-allowed" : ""
                                 }`}
                                 style={{ width: "120px", whiteSpace: "nowrap" }}
