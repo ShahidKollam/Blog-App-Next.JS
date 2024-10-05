@@ -22,7 +22,7 @@ const SignInForm = () => {
         formState: { errors },
     } = useForm({ resolver: zodResolver(schema) });
 
-    const loginMutation = useMutation({
+    const mutation = useMutation({
         mutationFn: async (formData) => {
             const response = await axios.post("/api/user/signUp", formData);
             return response.data;
@@ -39,7 +39,7 @@ const SignInForm = () => {
     });
 
     const onSubmit = (data) => {
-        loginMutation.mutate(data);
+        mutation.mutate(data);
         console.log(data);
     };
 
@@ -89,7 +89,7 @@ const SignInForm = () => {
                     <input
                         type="submit"
                         className="bg-yellow-400 text-black w-full p-2 md:w-1/3 md:p-3 font-bold rounded-xl"
-                        value="Sign Up"
+                        value={mutation.isPending ? 'Loading...' : 'Sign Up'}
                     />
                 </div>
             </form>

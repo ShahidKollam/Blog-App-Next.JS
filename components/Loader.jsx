@@ -1,6 +1,6 @@
 const Loader = () => {
     return (
-        <div className="flex justify-center h-screen w-full">
+        <div className="flex justify-center w-full">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width={50} height={50}>
                 <radialGradient id="a10" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
                     <stop offset="0" stopColor="#C9DDFF"></stop>

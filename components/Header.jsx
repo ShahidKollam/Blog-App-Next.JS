@@ -5,11 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import useLogout from "@/hooks/useLogout";
+import Loader from "./Loader";
 
 const Header = () => {
     const { logoutHandler, isLoading, error } = useLogout();
     const { user } = useStore();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const handleClick = () => {
+        setLoading(true);
+    };
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -53,8 +59,12 @@ const Header = () => {
                 <div className="flex justify-end w-[20%] gap-1">
                     {!user ? (
                         <Link href="/sign-in" className="">
-                            <button className="hidden md:flex bg-yellow-400 text-black text-center font-semibold rounded-md p-2 px-3 hover:bg-yellow-600">
-                                Log In
+                            <button
+                                onClick={handleClick}
+                                disabled={loading}
+                                className="hidden md:flex bg-yellow-400 text-black text-center font-semibold rounded-md p-2 px-3 hover:bg-yellow-600"
+                            >
+                                {loading ? "Loading.." : "Log In"}
                             </button>
                         </Link>
                     ) : (

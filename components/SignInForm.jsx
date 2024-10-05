@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import useStore from "@/store/useStore";
+import { Loader } from "lucide-react";
 
 const SignInForm = () => {
     const router = useRouter();
@@ -58,6 +59,7 @@ const SignInForm = () => {
         <div className="flex px-3 md:pt-20 md:pl-44 pb-36">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-7 w-full md:w-2/4">
                 <label>Email Address</label>
+                
                 <input
                     type="text"
                     {...register("email")}
@@ -83,7 +85,7 @@ const SignInForm = () => {
                     <input
                         type="submit"
                         className="bg-yellow-400 text-black w-full p-2 md:w-1/3 md:p-3 font-bold rounded-xl"
-                        value="Log In"
+                        value={loginMutation.isPending ? 'Loading...' : 'Log In'}
                     />
                     <p>or</p>
                     <p>

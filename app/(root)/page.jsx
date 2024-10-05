@@ -2,6 +2,8 @@
 import BlogCard_lg from "@/components/BlogCard_lg";
 import BlogCard_sm from "@/components/BlogCard_sm";
 import Loader from "@/components/Loader";
+import HomeContent from "@/components/HomeContent";
+
 import useFetchBlogs from "@/hooks/useFetchBlogs";
 
 export default function Home() {
@@ -21,9 +23,9 @@ export default function Home() {
 
     return (
         <>
+            <HomeContent />
             {featuredBlog && <BlogCard_lg blog={featuredBlog} />}
 
-            {/* Display the rest of the blogs in BlogCard_sm */}
 
             <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5 p-4 md:p-10">
                 {remainingBlogs.map((blogs) => (
