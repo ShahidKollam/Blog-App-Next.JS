@@ -13,6 +13,8 @@ export default function BlogTable() {
         return <p>Error fetching blogs: {error.message}</p>;
     }
 
+    const deleteBlog = () => {};
+
     return (
         <div className="overflow-x-auto p-5">
             <table className=" bg-zinc-900 text-gray-300 w-full">
@@ -37,7 +39,7 @@ export default function BlogTable() {
                                     <button className="text-blue-200 hover:text-blue-700">
                                         <FaEdit />
                                     </button>
-                                    <button className="text-red-200 hover:text-red-700">
+                                    <button onClick={deleteBlog} className="text-red-200 hover:text-red-700">
                                         <FaTrash />
                                     </button>
                                 </div>

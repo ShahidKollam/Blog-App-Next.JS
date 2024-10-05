@@ -19,7 +19,6 @@ export async function POST(req) {
         if (!blogTitle || !publishingDate || !category || !authorName || !paragraphTitle || !description) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });
         }
-        console.log("okkkkkk");
         
         if (blogImage) {
             const uploadResponse = await cloudinary.uploader.upload(blogImage);
