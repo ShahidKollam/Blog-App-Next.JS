@@ -3,7 +3,23 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import Loader from "../Loader";
 import useFetchBlogs from "@/hooks/useFetchBlogs";
 import { formatDate } from "@/utils/formateDate";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+
 export default function BlogTable() {
+    const queryClient = useQueryClient();
+
+    const { mutate: deleteBlog } = useMutation({
+        mutationFn: async (blogId) => {
+            const response = await axios.delete(`/api/admin/deleteBlog?id=${blogId}`);
+            return response.data;
+        },
+        onSuccess: () => {
+            // Invalidate and refetch the 'blogs' query to update the table after deletion
+            queryClient.invalidateQueries(["blogs"]);
+        },
+    });
+
     // Fetch blogs using the custom hook
     const { isError, isLoading, error, data } = useFetchBlogs();
     if (isLoading) {
@@ -13,8 +29,12 @@ export default function BlogTable() {
         return <p>Error fetching blogs: {error.message}</p>;
     }
 
-    const deleteBlog = () => {};
-
+    const handleDeleteBlog = (blogId) => {
+        const isConfirmed = window.confirm("Are you sure you want to delete this blog?");
+        if (isConfirmed) {
+            deleteBlog(blogId);
+        }
+    };
     return (
         <div className="overflow-x-auto p-5">
             <table className=" bg-zinc-900 text-gray-300 w-full">
@@ -29,7 +49,7 @@ export default function BlogTable() {
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
-                        <tr key={item.id} className="border-b border-zinc-800">
+                        <tr key={item._id} className="border-b border-zinc-800">
                             <td className="py-3 px-6">{item.authorName}</td>
                             <td className="py-3 px-6">{item.category}</td>
                             <td className="py-3 px-6">{item.blogTitle}</td>
@@ -39,7 +59,10 @@ export default function BlogTable() {
                                     <button className="text-blue-200 hover:text-blue-700">
                                         <FaEdit />
                                     </button>
-                                    <button onClick={deleteBlog} className="text-red-200 hover:text-red-700">
+                                    <button
+                                        onClick={() => handleDeleteBlog(item._id)}
+                                        className="text-red-200 hover:text-red-700"
+                                    >
                                         <FaTrash />
                                     </button>
                                 </div>
