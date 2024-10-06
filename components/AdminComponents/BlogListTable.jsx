@@ -30,10 +30,16 @@ export default function BlogTable() {
     }
 
     const handleDeleteBlog = (blogId) => {
-        const isConfirmed = window.confirm("Are you sure you want to delete this blog?");
-        if (isConfirmed) {
-            deleteBlog(blogId);
+        if (typeof window !== 'undefined') {
+            console.log('Window is available');
         }
+        console.log("Delete button clicked for blog:", blogId); // Add this to verify if the function is called
+        deleteBlog(blogId);
+
+        // const isConfirmed = window.confirm("Are you sure you want to delete this blog?");
+        // if (isConfirmed) {
+        //     deleteBlog(blogId);
+        // }
     };
     return (
         <div className="overflow-x-auto p-5">
