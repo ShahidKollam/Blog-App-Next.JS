@@ -10,7 +10,7 @@ export async function DELETE(req) {
         // Extract the blog ID from the request URL
         const { searchParams } = new URL(req.url);
         const blogId = searchParams.get("id");
- 
+
         if (!blogId) {
             return NextResponse.json({ error: "Blog ID is required" }, { status: 400 });
         }
@@ -27,7 +27,7 @@ export async function DELETE(req) {
         revalidatePath("/");
         revalidatePath("/admin/blogList");
 
-        console.log("Blog deleted successfully:", deletedBlog.blogTitle);
+        // console.log("Blog deleted successfully:", deletedBlog.blogTitle);
 
         return NextResponse.json({ message: "Blog deleted successfully" }, { status: 200 });
     } catch (error) {
