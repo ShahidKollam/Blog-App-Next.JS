@@ -3,15 +3,14 @@ import Blog from "@/lib/models/BlogModel";
 import { NextResponse } from "next/server";
 // import { v2 as cloudinary } from "cloudinary";
 import cloudinary from "@/lib/config/cloudinary";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function POST(req) {
-    
     try {
         await connectDB();
 
         const body = await req.json();
-        
+
         const { blogTitle, publishingDate, category, authorName, paragraphTitle, description } = body;
 
         let { blogImage } = body;
@@ -19,7 +18,7 @@ export async function POST(req) {
         if (!blogTitle || !publishingDate || !category || !authorName || !paragraphTitle || !description) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });
         }
-        
+
         if (blogImage) {
             const uploadResponse = await cloudinary.uploader.upload(blogImage);
             blogImage = uploadResponse.secure_url;
@@ -29,7 +28,7 @@ export async function POST(req) {
         const newBlog = new Blog({
             blogImage,
             blogTitle,
-            publishingDate,
+            publishingDate, 
             category,
             authorName,
             paragraphTitle,
@@ -37,11 +36,12 @@ export async function POST(req) {
         });
 
         await newBlog.save();
-        revalidatePath('/')
-        revalidatePath('/admin/blogList')
+        revalidateTag("blogs");
+
+        revalidatePath("/");
+        revalidatePath("/admin/blogList");
 
         console.log("Blog created successfully:", newBlog.blogTitle);
-
 
         return NextResponse.json(newBlog, { status: 201 });
     } catch (error) {
